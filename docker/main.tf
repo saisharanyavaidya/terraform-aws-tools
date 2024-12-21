@@ -8,6 +8,12 @@ module "docker" {
   vpc_security_group_ids = ["sg-0fbcae1d2d339bcf4"]
   subnet_id = "subnet-0ce3cdb1524e357ae"
   ami = data.aws_ami.ami_id.id
+  root_block_device = [
+    {
+      volume_type = "gp3"
+      volume_size = 50
+    }
+  ]
 
   #docker will have all the installations neccessary for docker , userdata will be called only once while creating instance
   user_data = file("docker.sh")
